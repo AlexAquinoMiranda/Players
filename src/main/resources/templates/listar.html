@@ -3,7 +3,7 @@
 
 <head th:replace="layout/layout :: head"></head>
 
-<body style="background-image: url(https://wallpapercave.com/wp/wp9764020.jpg);">
+<body style="background-color: white;">
 
 	<div id="i18n_eliminar_cliente" th:text="#{text.cliente.eliminarOk}" style="display: none;"></div>
 
@@ -12,7 +12,8 @@
 	<div class="container py-4">
 
 		<div class="card bg-light">
-			<div class="card-header bg-primary border" th:text="${titulo}"></div>
+			<div class="card-header bg-primary border "  style="color: white; "
+			th:text="${titulo}"></div>
 			<div class="card-body">
 
 				<h4 class="card-title">
@@ -26,7 +27,7 @@
 							<th>nombre</th>
 							<th>apellido</th>
 							<th>email</th>
-							<th>fecha</th>
+							<th>dorsal</th>
 							<th>editar</th>
 							<th>eliminar</th>
 						</tr>

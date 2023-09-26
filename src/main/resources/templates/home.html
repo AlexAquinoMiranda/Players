@@ -19,9 +19,9 @@
 
 	<!--<header th:replace="layout/layout :: header"></header>-->
 
-	
 
-	<form th:action="@{/login}" method="post">
+
+	<form th:action="@{/home}" th:object="${usuario}" method="post" enctype="multipart/form-data">
 		<div class="wrapper fadeInDown">
 			<div id="formContent">
 				<!-- Tabs Titles -->
@@ -36,15 +36,19 @@
 
 				<!-- Login Form -->
 				<form>
-					<input type="email" id="login" class="fadeIn second" name="login" placeholder="email"><br><br>
-					<input type="password" id="password" class="fadeIn third" name="login" placeholder="password">
+					<input type="email" id="login"  th:field="*{correo}" th:errorclass="'form-control alert-danger'"  class="fadeIn second" name="login" placeholder="email"><br><br>
+					<input type="password" id="password"  th:field="*{password}"  th:errorclass="'form-control alert-danger'" class="fadeIn third" name="login" placeholder="password">
 
 					<br>
 				</form>
 				<br><br>
 				<!-- Remind Passowrd -->
 				<div id="formFooter">
-					<a class="underlineHover" href="https://mycolor.space/?hex=%2300CBFF&sub=1">Login</a>
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="submit" value="Crear Usuario" class="btn btn-outline-light" />
+						</div>
+					</div>
 				</div>
 
 			</div>

@@ -2,31 +2,122 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="layout/layout :: head"></head>
+<style>
+	* {
+		box-sizing: border-box;
+	}
+
+	html {
+		font-family: sans-serif;
+		font-weight: 300;
+		color: hsl(0 0% 15%);
+	}
+
+	h2 {
+		font-weight: 400;
+		margin: 2rem 0 0.25rem 0;
+	}
+
+	h1 {
+		position: fixed;
+		right: 1rem;
+		bottom: 1rem;
+		opacity: 0.5;
+		margin: 0;
+	}
+
+	p {
+		margin: 0;
+	}
+
+	body {
+		display: grid;
+	
+		min-height: 100vh;
+	}
+
+	figure {
+		width: 500px;
+		aspect-ratio: 8 / 5;
+		--bg: hsl(330 67% calc(90% - (var(--hover) * 10%)));
+		--accent: rgb(0, 128, 255);
+		transition: background 0.2s;
+		background:
+			radial-gradient(circle at top left, var(--accent), transparent 85%),
+			var(--bg);
+		margin: 0;
+		position: relative;
+		overflow: hidden;
+		border-radius: 1.5rem;
+	}
+
+	figure:after {
+		content: "";
+		position: absolute;
+		width: 20%;
+		aspect-ratio: 1;
+		border-radius: 50%;
+		bottom: 0%;
+		left: 10%;
+		background: linear-gradient(-65deg, var(--bg) 50%, var(--accent) 50%);
+		filter: blur(25px);
+		transform:
+			translateX(calc(var(--hover) * 15%)) scale(calc(1 + (var(--hover) * 0.2)));
+		transition: transform 0.2s, background 0.2s;
+	}
+
+	img {
+		position: absolute;
+		left: 20%;
+		top: 15%;
+		width: 40%;
+		transform:
+			translateX(calc(var(--hover) * -15%)) scale(calc(1 + (var(--hover) * 0.2)));
+		transition: transform 0.2s;
+	}
+
+	article {
+		--hover: 0;
+	}
+
+	article:hover {
+		--hover: 1;
+	}
+</style>
 
 <body>
 
 	-
 	<header th:replace="layout/layout :: header"></header>
 
+
+
 	<div class="container py-4">
 
 		<div class="card bg-light">
 			<div class="card-header" th:text="${titulo}"></div>
+
 			<div class="card-body">
 
 				<h4 class="card-title">
 
 				</h4>
-
-				<img th:if="${#strings.length(jugador.foto) > 0}" class="img-thumbnail rounded float-left"
-					style="max-width: 25%;" th:src="@{'/uploads/' + ${jugador.foto}}" th:alt="${jugador.foto}" />
-
-				<ul class="list-group">
+				<article>
+					<figure><img th:src="@{'/uploads/' + ${jugador.foto}}" alt=""></figure>
+					<br>
+					<ul class="list-group">
 					<li class="list-group-item active" th:text="${jugador.nombre} + ' ' + ${jugador.apellido}"></li>
-					<li class="list-group-item" th:text="${jugador.dni}"></li>
-					<li class="list-group-item" th:text="${jugador.dorsal}"></li>
-				
+					<li class="list-group-item" th:text="${'DNI: ' + ' ' + jugador.dni}"></li>
+					<li class="list-group-item" th:text="${'DORSAL: ' + ' ' +jugador.dorsal}"></li>
+
 				</ul>
+				</article>
+
+
+				<!--<img th:if="${#strings.length(jugador.foto) > 0}" class="img-thumbnail rounded float-left"
+					style="max-width: 25%;" th:src="@{'/uploads/' + ${jugador.foto}}" th:alt="${jugador.foto}" />-->
+
+				
 
 
 
@@ -36,7 +127,12 @@
 
 	</div>
 
-	<footer th:replace="layout/layout :: footer"></footer>
+
+
+
+
+
+
 </body>
 
 </html>

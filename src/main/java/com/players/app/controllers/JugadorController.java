@@ -2,16 +2,14 @@ package com.players.app.controllers;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.validation.Valid;
+//import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.Resource;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -28,8 +26,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.players.app.models.entity.Jugador;
+import com.players.app.models.entity.Usuario;
 import com.players.app.models.service.IJugadorService;
 import com.players.app.models.service.IUploadFileService;
+import com.players.app.models.service.IUsuarioService;
 
 @Controller
 @SessionAttributes("jugador")
@@ -40,6 +40,9 @@ public class JugadorController {
 
 	@Autowired(required=false)
 	private IUploadFileService uploadFileService;
+	
+	@Autowired
+	private IUsuarioService userService;
 
 	/**
 	 * metodo para ver la foto
@@ -84,7 +87,7 @@ public class JugadorController {
 		}
 
 		model.put("jugador", jugador);
-		model.put("titulo", "Nombre de Usuario: " + jugador.getNombre());
+		model.put("titulo", "Nombre de Jugador: " + jugador.getNombre());
 		return "ver";
 	}
 
@@ -176,6 +179,7 @@ public class JugadorController {
 		model.put("inicio", "Sing in");
 		model.put("crear", "Sing up");
 		model.put("titulo", "Autenticación de usuario");
+		model.put("usuario", new Usuario());
 		return "home";
 	}
 
@@ -191,7 +195,7 @@ public class JugadorController {
 	 * @return
 	 */
 	@RequestMapping(value = "/form", method = RequestMethod.POST)
-	public String guardar(@Valid Jugador jugador, BindingResult result, Model model,
+	public String guardar( Jugador jugador, BindingResult result, Model model,
 			@RequestParam("file") MultipartFile foto, RedirectAttributes flash, SessionStatus status) {
 
 		if (result.hasErrors()) {
@@ -235,7 +239,7 @@ public class JugadorController {
 			Jugador jugador = jugadorService.findOne(id);
 
 			jugadorService.deleteJugador(id);
-			flash.addFlashAttribute("success", "Cliente " + jugador.getNombre() + " eliminado con éxito!");
+			flash.addFlashAttribute("success", "Jugador " + jugador.getNombre() + " eliminado con éxito!");
 
 			/**
 			 * if (uploadFileService.delete(cliente.getFoto())) {
@@ -245,6 +249,24 @@ public class JugadorController {
 
 		}
 		return "redirect:/listar";
+	}
+	
+	@RequestMapping(value = "/home", method = RequestMethod.POST)
+	public String guardar( Usuario jugador, BindingResult result, Model model,
+			 RedirectAttributes flash, SessionStatus status) {
+
+		if (result.hasErrors()) {
+			model.addAttribute("titulo", "Formulario de Jugador");
+			return "form";
+		}
+
+
+		String mensajeFlash = (jugador.getId() != null) ? "Inicio de sesión correcto!" : "Perfil creado con éxito!";
+
+		userService.saveUser(jugador);
+		status.setComplete();
+		flash.addFlashAttribute("success", mensajeFlash);
+		return "redirect:listar";
 	}
 
 }

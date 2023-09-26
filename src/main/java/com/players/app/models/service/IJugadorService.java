@@ -3,13 +3,13 @@ package com.players.app.models.service;
 import java.util.List;
 
 
-import org.springframework.stereotype.Service;
+
 
 import com.players.app.models.entity.Equipo;
 import com.players.app.models.entity.Jugador;
 import com.players.app.models.entity.Torneo;
 
-@Service
+
 public interface IJugadorService {
 
 	public List<Jugador> findAllJugador();

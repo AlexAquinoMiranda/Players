@@ -3,8 +3,6 @@ package com.players.app.models.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,21 +14,23 @@ import com.players.app.models.entity.Torneo;
 
 @Service
 public class JugadorServiceImpl implements IJugadorService {
-	//@Autowired
-	//private IJugadorDao jugadorDao;
+	
+	
+	@Autowired(required=true)
+	private IJugadorDao jugadorDao;
 
 	@Override
 	@Transactional(readOnly = true)
 	public Jugador findOne(Long id) {
 
-	//	return jugadorDao.findById(id).orElse(null);
-		 return null;
+		return jugadorDao.findById(id).orElse(null);
+		// return null;
 	}
 
 	@Override
 	@Transactional
 	public void deleteJugador(Long id) {
-		// jugadorDao.deleteById(id);
+		 jugadorDao.deleteById(id);
 
 	}
 
@@ -45,8 +45,8 @@ public class JugadorServiceImpl implements IJugadorService {
 	@Transactional(readOnly = true)
 	public Jugador findJugadorById(Long id) {
 		// TODO Auto-generated method stub
-		 //return jugadorDao.findById(id).orElse(null);
-		return null;
+		 return jugadorDao.findById(id).orElse(null);
+		//return null;
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class JugadorServiceImpl implements IJugadorService {
 	@Transactional
 	public void saveJugador(Jugador jugador) {
 		
-		/**if (this.jugadorDao != null) {
+		if (this.jugadorDao != null) {
 			
 			 System.out.print("No es nulo");
 		    this.jugadorDao.save(jugador);
@@ -78,7 +78,7 @@ public class JugadorServiceImpl implements IJugadorService {
 		   System.err.print("ERROROROORORORORO");
 		   
 		   
-		}*/
+		}
 		
 	}
 
@@ -93,8 +93,8 @@ public class JugadorServiceImpl implements IJugadorService {
 	@Transactional(readOnly = true)
 	public List<Jugador> findAllJugador() {
 
-		 //return (List<Jugador>)jugadorDao.findAll();
-		return null;
+		 return (List<Jugador>)jugadorDao.findAll();
+		//return null;
 	}
 
 	@Override

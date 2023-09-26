@@ -13,17 +13,18 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.players.app.models.service.IUploadFileService;
 
-@SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
-@EntityScan(basePackages = "com.players.app")
+@SpringBootApplication
 
-
-
-
-//@ComponentScan({ "com.players.app.controllers", "com.players.app.models.dao", "com.players.app.models.service",
-//		"com.players.app.models.entity" })
-//@EnableJpaRepositories( "com.players.app.models.dao")
+@EntityScan(basePackages = "com.players.app.models.entity")
+@ComponentScan(basePackages = {
+	    "com.players.app.controllers",
+	    "com.players.app.models.dao",
+	    "com.players.app.models.service",
+	    "com.players.app.models.entity"
+	})
+@EnableJpaRepositories("com.players.app.models.dao")
 public class PlayersApplication implements CommandLineRunner {
-	@Autowired
+	@Autowired(required = true)
 	IUploadFileService uploadFileService;
 
 	public static void main(String[] args) {

@@ -3,10 +3,9 @@ package com.players.app.models.entity;
 import java.io.Serializable;
 
 
-import javax.validation.constraints.NotEmpty;
 
+import jakarta.persistence.*;
 
-import javax.persistence.*;
 
 @Entity
 @Table(name = "jugador")
@@ -15,15 +14,15 @@ public class Jugador implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotEmpty
+	
 	private String nombre;
-	@NotEmpty
+	
 	private String Apellido;
-	@NotEmpty
+	
 	private String dni;
 	
 	private String foto;
-	@NotEmpty
+	
 	private Integer dorsal;
 
 	//@ManyToOne
