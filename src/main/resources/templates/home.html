@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head"></head>
+
+<body style="background-image: url(https://wallpapercave.com/wp/wp9764020.jpg);
+ 			background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed; ">
+	</script>
+	<link rel="stylesheet" th:href="@{/css/welcome.css}" />
+	</script>
+
+	<title th:text="${titulo}"></title>
+	<style>
+
+	</style>
+
+
+	<!--<header th:replace="layout/layout :: header"></header>-->
+
+	
+
+	<form th:action="@{/login}" method="post">
+		<div class="wrapper fadeInDown">
+			<div id="formContent">
+				<!-- Tabs Titles -->
+				<h2 class="active" th:text="${inicio}"> </h2>
+				<h2 class="inactive underlineHover" th:text="${crear}"> </h2>
+
+				<!-- Icon -->
+				<div class="fadeIn first">
+					<img src="https://cdn.icon-icons.com/icons2/1494/PNG/512/user_102890.png" id="icon"
+						alt="User Icon" />
+				</div>
+
+				<!-- Login Form -->
+				<form>
+					<input type="email" id="login" class="fadeIn second" name="login" placeholder="email"><br><br>
+					<input type="password" id="password" class="fadeIn third" name="login" placeholder="password">
+
+					<br>
+				</form>
+				<br><br>
+				<!-- Remind Passowrd -->
+				<div id="formFooter">
+					<a class="underlineHover" href="https://mycolor.space/?hex=%2300CBFF&sub=1">Login</a>
+				</div>
+
+			</div>
+		</div>
+
+	</form>
+	<!-- <footer th:replace="layout/layout :: footer"></footer>-->
+
+</body>
+
+</html>
